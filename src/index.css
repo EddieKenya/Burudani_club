@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #0B0B0B;
+  --color-violet: #8A2BE2;
+  --color-gold: #D4AF37;
+}
+
+/* This forces the background to be dark immediately */
+@layer base {
+  body {
+    background-color: #0B0B0B;
+    color: white;
+  }
+}

@@ -1,43 +1,108 @@
-import { Menu, X, Martini } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    let timeout;
+    
+    const handleActivity = () => {
+      setIsVisible(true);
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        if (!isOpen) {
+          setIsVisible(false);
+        }
+      }, 3000);
+    };
+
+    window.addEventListener('scroll', handleActivity);
+    window.addEventListener('mousemove', handleActivity);
+    window.addEventListener('touchstart', handleActivity);
+
+    return () => {
+      window.removeEventListener('scroll', handleActivity);
+      window.removeEventListener('mousemove', handleActivity);
+      window.removeEventListener('touchstart', handleActivity);
+      clearTimeout(timeout);
+    };
+  }, [isOpen]);
+
+  const navLinks = [
+    { name: 'The Experience', href: '#hero' },
+    { name: 'About', href: '#about' },
+    { name: 'Events', href: '#events' },
+    { name: 'Experience', href: '#walkthrough' },
+    { name: 'Contact Us', href: '#contact' },
+  ];
 
   return (
-    <nav className="fixed w-full z-50 top-0 bg-obsidian/80 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <nav 
+      className={`fixed w-full z-50 top-0 bg-obsidian/95 backdrop-blur-md border-b border-white/10 transition-all duration-700 ease-in-out ${
+        isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+      }`}
+    >
+      <div className="max-w-[1400px] mx-auto px-6 h-24 flex items-center justify-between">
+        
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <Martini className="text-violet w-8 h-8" />
-          <span className="text-2xl font-black tracking-tighter text-white">
-            BURUDANI<span className="text-gold">.</span>
-          </span>
+        <div className="flex items-center h-full py-2">
+          <a href="#hero" className="h-full block group relative">
+            <img 
+              src="/burudani-log.png" 
+              alt="Burudani Address" 
+              className="h-full w-auto object-contain transition-all duration-500 group-hover:scale-105 brightness-110 contrast-125 mix-blend-lighten"
+              style={{
+                filter: 'drop-shadow(0 0 12px rgba(212, 175, 55, 0.2))'
+              }}
+            />
+          </a>
         </div>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex gap-8 text-sm font-medium uppercase tracking-widest">
-          <a href="#" className="hover:text-violet transition-colors">The Experience</a>
-          <a href="#" className="hover:text-violet transition-colors">Events</a>
-          <a href="#" className="hover:text-violet transition-colors">Menu</a>
-          <button className="bg-gold text-obsidian px-5 py-2 rounded-full font-bold hover:bg-white transition-all">
-            Book Table
-          </button>
+        {/* Desktop Links - Updated with your specific order */}
+        <div className="hidden lg:flex gap-6 xl:gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-white items-center">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href} 
+              className="hover:text-gold transition-colors duration-300 whitespace-nowrap"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a href="#booking">
+            <button className="bg-gold text-obsidian px-6 py-2.5 rounded-full font-black hover:bg-white transition-all shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-gold/40 active:scale-95 whitespace-nowrap">
+              BOOK A TABLE
+            </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X /> : <Menu />}
+        <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-obsidian border-b border-white/10 p-6 flex flex-col gap-4 text-center uppercase tracking-widest">
-          <a href="#" className="text-white">Experience</a>
-          <a href="#" className="text-white">Events</a>
-          <a href="#" className="text-white">Menu</a>
-          <button className="bg-violet text-white py-3 rounded-lg font-bold">Book Now</button>
+        <div className="lg:hidden bg-obsidian/98 border-b border-white/10 p-8 flex flex-col gap-6 text-center uppercase tracking-[0.2em] text-white font-bold animate-in fade-in slide-in-from-top-4">
+          {navLinks.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href} 
+              onClick={() => setIsOpen(false)} 
+              className="hover:text-gold"
+            >
+              {link.name}
+            </a>
+          ))}
+          <a href="#booking" onClick={() => setIsOpen(false)}>
+            <button className="w-full bg-gold text-obsidian py-4 rounded-xl font-black text-sm">
+              BOOK A TABLE
+            </button>
+          </a>
         </div>
       )}
     </nav>

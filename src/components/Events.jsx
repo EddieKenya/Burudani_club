@@ -1,12 +1,11 @@
 const Events = () => {
-  // Hardcoded data for the 3 specific event slots
   const staticEvents = [
     {
       id: 1,
       title: "Live Bands",
       day: "12",
       time: "6pm",
-      poster: "/livebands.png", // Ensure this is in your public folder
+      poster: "/livebands.png",
       color: "border-green-500",
       indicator: "bg-green-500"
     },
@@ -42,13 +41,16 @@ const Events = () => {
           {staticEvents.map((event) => (
             <div 
               key={event.id}
-              className={`relative h-[450px] overflow-hidden group border-l-4 ${event.color} rounded-r-2xl bg-white/5 transition-all duration-500 hover:bg-white/10`}
+              /* Added group-active: and active: for mobile touch response */
+              className={`relative h-[450px] overflow-hidden group border-l-4 ${event.color} rounded-r-2xl bg-white/5 transition-all duration-500 hover:bg-white/10 active:bg-white/10 touch-auto`}
             >
-              {/* Event Poster Background */}
+              {/* Event Poster Background - Effects trigger on Hover (PC) and Active (Phone) */}
               <img 
                 src={event.poster} 
                 alt={event.title}
-                className="absolute inset-0 w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700 opacity-40 group-hover:opacity-60"
+                className="absolute inset-0 w-full h-full object-cover grayscale-[0.5] transition-all duration-700 opacity-40 
+                           group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-110
+                           group-active:grayscale-0 group-active:opacity-60 group-active:scale-110"
               />
               
               {/* Dark Gradient Overlay */}
@@ -63,7 +65,7 @@ const Events = () => {
                   <div className={`w-2 h-2 rounded-full animate-pulse ${event.indicator}`} />
                 </div>
 
-                <h3 className="text-white text-3xl font-black mb-3 group-hover:text-white transition-colors tracking-tighter uppercase italic leading-tight">
+                <h3 className="text-white text-3xl font-black mb-3 transition-colors tracking-tighter uppercase italic leading-tight group-hover:text-white group-active:text-white">
                   {event.title}
                 </h3>
 
@@ -72,7 +74,7 @@ const Events = () => {
                 </p>
 
                 <a href="#booking" className="inline-block">
-                  <button className="text-white text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-white/10 pb-2 hover:border-gold transition-all hover:text-gold">
+                  <button className="text-white text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-white/10 pb-2 transition-all hover:border-gold hover:text-gold active:border-gold active:text-gold">
                     Get Tickets
                   </button>
                 </a>

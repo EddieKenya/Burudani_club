@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <h2 className="text-2xl font-black tracking-tighter italic">
-              BURUDANI<span className="text-gold">.</span>
+              BURUDANI ADDRESS<span className="text-gold">.</span>
             </h2>
             <p className="text-gray-400 text-sm max-w-xs mx-auto md:mx-0">
               The ultimate evolution of Juja nightlife. Experience premium sound and unmatched vibes.

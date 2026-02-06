@@ -41,22 +41,25 @@ const Events = () => {
           {staticEvents.map((event) => (
             <div 
               key={event.id}
-              /* Added group-active: and active: for mobile touch response */
-              className={`relative h-[450px] overflow-hidden group border-l-4 ${event.color} rounded-r-2xl bg-white/5 transition-all duration-500 hover:bg-white/10 active:bg-white/10 touch-auto`}
+              /* 1. select-none: Stops text selection popups.
+                 2. pointer-events-auto: Ensures clicks still work.
+                 3. webkit-touch-callout: Specifically kills the iPhone "Save Image" popup.
+              */
+              className={`relative h-[450px] overflow-hidden group border-l-4 ${event.color} rounded-r-2xl bg-white/5 transition-all duration-500 hover:bg-white/10 active:bg-white/10 select-none`}
+              style={{ WebkitTouchCallout: 'none' }} 
             >
-              {/* Event Poster Background - Effects trigger on Hover (PC) and Active (Phone) */}
+              {/* Event Poster Background */}
               <img 
                 src={event.poster} 
                 alt={event.title}
-                className="absolute inset-0 w-full h-full object-cover grayscale-[0.5] transition-all duration-700 opacity-40 
+                /* pointer-events-none ensures the image itself doesn't trigger "Save Image" on long press */
+                className="absolute inset-0 w-full h-full object-cover grayscale-[0.5] transition-all duration-700 opacity-40 pointer-events-none
                            group-hover:grayscale-0 group-hover:opacity-60 group-hover:scale-110
                            group-active:grayscale-0 group-active:opacity-60 group-active:scale-110"
               />
               
-              {/* Dark Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent z-10" />
 
-              {/* Content Overlay */}
               <div className="relative z-20 p-10 h-full flex flex-col justify-end">
                 <div className="flex justify-between items-start mb-2">
                   <p className="text-gold font-black uppercase tracking-[0.2em] text-xs">
@@ -74,7 +77,7 @@ const Events = () => {
                 </p>
 
                 <a href="#booking" className="inline-block">
-                  <button className="text-white text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-white/10 pb-2 transition-all hover:border-gold hover:text-gold active:border-gold active:text-gold">
+                  <button className="text-white text-[10px] font-black uppercase tracking-[0.2em] border-b-2 border-white/10 pb-2 transition-all hover:border-gold active:border-gold">
                     Get Tickets
                   </button>
                 </a>

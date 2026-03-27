@@ -14,7 +14,7 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    }, 6000); // Increased slightly to allow the zoom effect to breathe
 
     return () => clearInterval(interval);
   }, [images.length]);
@@ -27,24 +27,25 @@ const Hero = () => {
         {images.map((img, index) => (
           <div
             key={index}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] ease-in-out ${
-              index === currentIndex ? 'opacity-100 scale-105' : 'opacity-0 scale-100'
-            } transition-transform duration-[5000ms]`}
+            className={`absolute inset-0 bg-cover bg-center will-change-transform transition-all duration-[2500ms] ease-in-out ${
+              index === currentIndex 
+                ? 'opacity-100 scale-110 visible' 
+                : 'opacity-0 scale-100 invisible'
+            }`}
             style={{ 
               backgroundImage: `url(${img})`,
-              backfaceVisibility: 'hidden' 
+              transitionProperty: 'opacity, transform' // Explicitly tells browser what to animate
             }}
           />
         ))}
       </div>
 
-      {/* Professional Overlay - Using Blue/White Gradients instead of Black/Violet */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 via-slate-900/40 to-slate-900/80 z-10" />
-      <div className="absolute inset-0 bg-blue-900/10 z-10" />
+      {/* Professional Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/60 via-slate-900/40 to-slate-900/90 z-10" />
 
       {/* Hero Content */}
       <div className="relative z-20 text-center px-6 max-w-5xl">
-        <h2 className="text-white text-xs md:text-lg font-bold tracking-[0.4em] uppercase mb-4 drop-shadow-lg">
+        <h2 className="text-white text-xs md:text-lg font-bold tracking-[0.4em] uppercase mb-4 animate-pulse">
           Your Trusted Partner in Global Mobility
         </h2>
         
@@ -53,14 +54,13 @@ const Hero = () => {
           <span className="text-blue-400">TRAVEL WORLDWIDE</span>
         </h1>
         
-        <p className="text-gray-100 max-w-2xl mx-auto text-base md:text-xl font-medium leading-relaxed mb-10 drop-shadow-md">
+        <p className="text-gray-100 max-w-2xl mx-auto text-base md:text-xl font-medium leading-relaxed mb-10">
           Exceptional travel experiences for Work Visas, Study Visas, and Permanent Residency 
           to Canada, UK, USA, Europe, and the Middle East.
         </p>
         
-        {/* Responsive Button Group */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="#services" className="w-full sm:w-auto">
+          <a href="#events" className="w-full sm:w-auto">
             <button className="w-full bg-blue-600 hover:bg-white hover:text-blue-900 text-white px-10 py-4 rounded-lg font-black text-sm md:text-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-xl flex items-center justify-center gap-2">
               OUR SERVICES <Plane size={20} className="rotate-45" />
             </button>
@@ -73,9 +73,11 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce hidden md:block">
-        <div className="w-1 h-12 rounded-full bg-gradient-to-b from-blue-400 to-transparent opacity-80" />
+      {/* Animated Scroll Indicator */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 hidden md:block">
+        <div className="w-[2px] h-16 bg-white/20 rounded-full relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-blue-400 animate-scroll-move" />
+        </div>
       </div>
     </section>
   );

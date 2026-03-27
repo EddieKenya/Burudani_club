@@ -1,4 +1,4 @@
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Plane, Briefcase, GraduationCap, Phone, MapPin } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
@@ -7,15 +7,11 @@ const Navbar = () => {
 
   useEffect(() => {
     let timeout;
-    
     const handleActivity = () => {
       setIsVisible(true);
       clearTimeout(timeout);
-
       timeout = setTimeout(() => {
-        if (!isOpen) {
-          setIsVisible(false);
-        }
+        if (!isOpen) setIsVisible(false);
       }, 3000);
     };
 
@@ -31,76 +27,90 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  // Links aligned with App.jsx IDs
   const navLinks = [
-    { name: 'The Experience', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Events', href: '#events' },
-    { name: 'Experience', href: '#walkthrough' },
+    { name: 'About Us', href: '#about' },
+    { name: 'Study Visas', href: '#events', icon: <GraduationCap size={14} /> },
+    { name: 'Work Visas', href: '#walkthrough', icon: <Briefcase size={14} /> },
+    { name: 'Destinations', href: '#booking', icon: <MapPin size={14} /> },
     { name: 'Contact Us', href: '#contact' },
   ];
 
   return (
     <nav 
-      className={`fixed w-full z-50 top-0 bg-obsidian/95 backdrop-blur-md border-b border-white/10 transition-all duration-700 ease-in-out ${
+      className={`fixed w-full z-50 top-0 transition-all duration-700 ease-in-out select-none ${
         isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
-      }`}
+      } bg-white/95 backdrop-blur-md border-b border-blue-100`}
+      style={{ WebkitTouchCallout: 'none' }}
     >
-      <div className="max-w-[1400px] mx-auto px-6 h-24 flex items-center justify-between">
+      <div className="max-w-[1400px] mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
         
-        {/* Logo */}
-        <div className="flex items-center h-full py-2">
-          <a href="#hero" className="h-full block group relative">
-            <img 
-              src="/burudani-log.png" 
-              alt="Burudani Address" 
-              className="h-full w-auto object-contain transition-all duration-500 group-hover:scale-105 brightness-110 contrast-125 mix-blend-lighten"
-              style={{
-                filter: 'drop-shadow(0 0 12px rgba(212, 175, 55, 0.2))'
-              }}
-            />
+        {/* Logo Section */}
+        <div className="flex items-center h-full py-4">
+          <a href="#hero" className="h-full block group flex items-center gap-3">
+            <div className="flex flex-col">
+              <span className="font-black text-blue-900 tracking-tighter text-2xl leading-none">
+                PASCAL
+              </span>
+              <span className="text-[10px] font-bold text-blue-600 tracking-[0.3em] uppercase">
+                Travels & Tours
+              </span>
+            </div>
           </a>
         </div>
 
-        {/* Desktop Links - Updated with your specific order */}
-        <div className="hidden lg:flex gap-6 xl:gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-white items-center">
+        {/* Desktop Links */}
+        <div className="hidden lg:flex gap-8 xl:gap-10 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-700 items-center">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="hover:text-gold transition-colors duration-300 whitespace-nowrap"
+              className="hover:text-blue-600 transition-colors duration-300 whitespace-nowrap flex items-center gap-2 group relative"
             >
+              {link.icon && <span className="text-blue-400 group-hover:text-blue-600 transition-colors">{link.icon}</span>}
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
             </a>
           ))}
-          <a href="#booking">
-            <button className="bg-gold text-obsidian px-6 py-2.5 rounded-full font-black hover:bg-white transition-all shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-gold/40 active:scale-95 whitespace-nowrap">
-              BOOK A TABLE
+          
+          <div className="h-6 w-[1px] bg-slate-200 mx-2"></div>
+
+          <a href="tel:+2547155995408" className="hover:text-blue-600 transition-colors flex items-center gap-2 text-blue-900">
+            <Phone size={16} />
+            <span className="hidden xl:inline">CALL US</span>
+          </a>
+
+          <a href="#contact">
+            <button className="bg-blue-600 text-white px-7 py-3 rounded-lg font-black hover:bg-blue-700 transition-all active:scale-95 shadow-md shadow-blue-100 flex items-center gap-2">
+              <Plane size={16} className="rotate-45" /> APPLY NOW
             </button>
           </a>
         </div>
 
-        {/* Mobile Toggle */}
-        <button className="lg:hidden text-white p-2" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* Mobile Controls */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <button className="text-blue-900 p-2" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-obsidian/98 border-b border-white/10 p-8 flex flex-col gap-6 text-center uppercase tracking-[0.2em] text-white font-bold animate-in fade-in slide-in-from-top-4">
+        <div className="lg:hidden bg-white border-b border-slate-200 p-10 flex flex-col gap-8 text-center uppercase tracking-[0.2em] text-slate-800 font-bold">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
               onClick={() => setIsOpen(false)} 
-              className="hover:text-gold"
+              className="hover:text-blue-600 text-sm"
             >
               {link.name}
             </a>
           ))}
-          <a href="#booking" onClick={() => setIsOpen(false)}>
-            <button className="w-full bg-gold text-obsidian py-4 rounded-xl font-black text-sm">
-              BOOK A TABLE
+          <a href="#contact" onClick={() => setIsOpen(false)} className="pt-4 border-t border-slate-100">
+            <button className="w-full bg-blue-600 text-white py-4 rounded-lg font-black text-xs tracking-widest flex items-center justify-center gap-2">
+              START APPLICATION <Plane size={16} className="rotate-45" />
             </button>
           </a>
         </div>

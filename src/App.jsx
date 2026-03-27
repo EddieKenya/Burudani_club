@@ -1,12 +1,12 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Events from './components/Events'
-import Walkthrough from './components/Walkthrough'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Booking from './components/Booking'
 import About from './components/About'
-
+import Education from './components/Education'
+import Work from './components/Work'
+import Destinations from './components/Destinations'
 function App() {
   return (
     <div className="min-h-screen bg-obsidian selection:bg-violet selection:text-white">
@@ -24,17 +24,17 @@ function App() {
 
       {/* Anchor for "Events" */}
       <div id="events">
-        <Events />
+        <Education/>
       </div>
 
       {/* Anchor for "Experience" (Walkthrough) */}
       <div id="walkthrough">
-        <Walkthrough />
+        <Work/>
       </div>
 
       {/* Anchor for "BOOK A TABLE" */}
       <div id="booking">
-        <Booking />
+        <Destinations/>
       </div>
 
       {/* Anchor for "Contact Us" */}

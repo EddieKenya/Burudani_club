@@ -1,6 +1,17 @@
-import { Phone, Mail, MapPin, Send, MessageCircle, Globe, Award } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { 
+  Phone, Mail, MapPin, Send, 
+  CheckCircle2, Loader2, Award, 
+  Globe, ChevronDown 
+} from 'lucide-react';
 
 const Contact = () => {
+  const form = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState({ sent: false, error: false });
+
+  // Office Data Configuration
   const offices = [
     {
       country: "Kenya (Head Office)",
@@ -26,18 +37,39 @@ const Contact = () => {
     }
   ];
 
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    emailjs.sendForm(
+      'YOUR_SERVICE_ID', 
+      'YOUR_TEMPLATE_ID', 
+      form.current, 
+      'YOUR_PUBLIC_KEY'
+    )
+    .then(() => {
+      setIsSubmitting(false);
+      setStatus({ sent: true, error: false });
+      form.current.reset();
+      setTimeout(() => setStatus({ sent: false, error: false }), 7000);
+    }, (error) => {
+      setIsSubmitting(false);
+      setStatus({ sent: false, error: true });
+      console.error('EmailJS Error:', error);
+    });
+  };
+
   return (
     <section id="contact" className="py-24 px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         
         <div className="text-center mb-16">
-          <h2 className="text-blue-600 font-bold tracking-[0.4em] uppercase mb-4 text-xs">Get in Touch</h2>
+          <h2 className="text-blue-600 font-bold tracking-[0.4em] uppercase mb-4 text-xs">Get In Touch</h2>
           <h1 className="text-4xl md:text-6xl font-black text-blue-900 tracking-tighter uppercase">
-            Our Global <span className="text-blue-600 italic font-light">Network</span>
+            Contact Our <span className="text-blue-600 italic font-light">Global Offices</span>
           </h1>
         </div>
 
-        {/* Global Offices Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {offices.map((office, idx) => (
             <div key={idx} className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-200 hover:border-blue-500 transition-all group">
@@ -51,17 +83,13 @@ const Contact = () => {
 
               <div className="space-y-4">
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Address</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Location</p>
                   <p className="text-slate-600 font-bold text-sm leading-relaxed">{office.location}</p>
                 </div>
-
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Direct Lines</p>
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Contact Lines</p>
                   {office.phones.map((p, i) => (
                     <p key={i} className="text-blue-600 font-black text-lg">{p}</p>
-                  ))}
-                  {office.intl && office.intl.map((p, i) => (
-                    <p key={i} className="text-slate-400 font-bold text-xs mt-1">Intl: {p}</p>
                   ))}
                 </div>
               </div>
@@ -69,26 +97,24 @@ const Contact = () => {
           ))}
         </div>
 
-        {/* Unified Contact Form */}
         <div className="grid lg:grid-cols-5 gap-8 items-stretch">
           <div className="lg:col-span-2 bg-blue-900 rounded-[3rem] p-10 text-white shadow-2xl flex flex-col justify-between">
             <div>
-              <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">Connect with us</h3>
-              <p className="text-blue-100 mb-8 font-medium">Follow our journey and see successful visa testimonies on our social platforms.</p>
+              <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">Connect With Us</h3>
+              <p className="text-blue-100 mb-8 font-medium">Our support team is available across multiple timezones to assist your travel needs.</p>
               
               <div className="space-y-4">
-                <div className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/10 hover:bg-white/20 transition-all">
-                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-black">T</div>
+                <a href="https://www.tiktok.com/@pascal_travels_and_tours" target="_blank" rel="noreferrer" className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/10 hover:bg-white/20 transition-all">
+                  <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center font-black text-white text-sm">T</div>
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-blue-300">TikTok Handle</p>
+                    <p className="text-[10px] uppercase font-bold text-blue-300">TikTok</p>
                     <p className="font-bold text-sm">@pascal_travels_and_tours</p>
                   </div>
-                </div>
-
+                </a>
                 <div className="flex items-center gap-4 p-4 bg-white/10 rounded-2xl border border-white/10 hover:bg-white/20 transition-all">
-                  <Mail className="text-blue-300" />
+                  <Mail className="text-blue-300" size={20} />
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-blue-300">Official Email</p>
+                    <p className="text-[10px] uppercase font-bold text-blue-300">Email Support</p>
                     <p className="font-bold text-sm">pascaltravels@gmail.com</p>
                   </div>
                 </div>
@@ -96,57 +122,69 @@ const Contact = () => {
             </div>
 
             <div className="mt-8 pt-8 border-t border-white/10">
-              <p className="text-xs font-bold uppercase tracking-widest text-blue-400 mb-2">Available 24/7</p>
-              <p className="text-sm font-medium opacity-70">Our support team is ready to assist you in any time zone.</p>
+              <div className="flex items-center gap-2 text-blue-400 mb-2">
+                <Globe size={16} />
+                <p className="text-xs font-bold uppercase tracking-widest">Global Mobility Licensed</p>
+              </div>
+              <p className="text-sm font-medium opacity-70 italic">Your journey begins with a single trusted step.</p>
             </div>
           </div>
 
-          {/* Fixed Visibility Form */}
-          <div className="lg:col-span-3 bg-white rounded-[3rem] p-10 shadow-2xl border border-slate-200 relative overflow-hidden">
-            <h3 className="text-2xl font-black text-blue-900 mb-8 uppercase tracking-tight italic">Send a Quick Message</h3>
+          <div className="lg:col-span-3 bg-white rounded-[3rem] p-10 shadow-2xl border border-slate-200">
+            <h3 className="text-2xl font-black text-blue-900 mb-8 uppercase tracking-tight">Send An Inquiry</h3>
             
-            <form className="space-y-5">
+            <form ref={form} onSubmit={sendEmail} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Full Name</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. John Doe" 
-                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-900 placeholder:text-slate-400" 
-                  />
+                  <input name="user_name" type="text" required placeholder="e.g. John Doe" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Phone Number</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. +254 7XX XXX XXX" 
-                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-900 placeholder:text-slate-400" 
-                  />
+                  <input name="user_phone" type="text" required placeholder="+254 XXX XXX XXX" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
+                </div>
+              </div>
+
+              {/* REQUESTED SERVICE DROPDOWN ADDED HERE */}
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Requested Service</label>
+                <div className="relative">
+                  <select 
+                    name="requested_service" 
+                    required 
+                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900 font-bold appearance-none cursor-pointer"
+                  >
+                    <option value="" disabled selected>Select a Service</option>
+                    <option value="Work Permit">Work Visa</option>
+                    <option value="Study Visa">Study Visa</option>
+                    <option value="Visit Visa">Job Placements</option>
+                    <option value="Canada PR">Permanent Residency (Canada PR)</option>
+                    <option value="Job Placement">Schengen Visa</option>
+                  </select>
+                  <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={20} />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Requested Service</label>
-                <select className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-500 transition-all text-slate-700 font-bold appearance-none cursor-pointer">
-                  <option>Employment Offer</option>
-                  <option>Ticketing</option>
-                  <option>Study Visa</option>
-                  <option>Canada pr</option>
-                </select>
+                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Email Address</label>
+                <input name="user_email" type="email" required placeholder="name@email.com" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Message</label>
-                <textarea 
-                  placeholder="Tell us about your travel plans..." 
-                  rows="4" 
-                  className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-900 placeholder:text-slate-400"
-                ></textarea>
+                <textarea name="message" required placeholder="How can we assist you today?" rows="4" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900"></textarea>
               </div>
 
-              <button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-6 rounded-2xl transition-all flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-sm shadow-xl transform active:scale-95 group">
-                Send Inquiry <Send size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-6 rounded-2xl transition-all flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-sm shadow-xl disabled:opacity-50">
+                {isSubmitting ? <>Processing... <Loader2 className="animate-spin" size={20} /></> : <>Send Inquiry <Send size={20} /></>}
               </button>
+
+              {status.sent && (
+                <div className="p-4 bg-green-50 border border-green-200 rounded-2xl flex items-center gap-3 text-green-700 font-bold animate-in fade-in">
+                  <CheckCircle2 size={20} />
+                  Message received! We have sent an automatic reply to your email.
+                </div>
+              )}
             </form>
           </div>
         </div>

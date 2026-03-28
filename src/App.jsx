@@ -8,6 +8,7 @@ import Education from './components/Education';
 import Work from './components/Work';
 import Destinations from './components/Destinations';
 import Preloader from './components/Preloader';
+import VideoSuccess from './components/VideoSuccess';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -68,6 +69,11 @@ function App() {
         <Education />
       </div>
 
+      {/* Work Visas Section */}
+      <div id="success">
+        <VideoSuccess />
+      </div>
+      
       {/* Work Visas Section */}
       <div id="walkthrough">
         <Work />

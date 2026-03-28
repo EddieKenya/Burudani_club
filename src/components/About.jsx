@@ -1,113 +1,103 @@
-import { MapPin, Navigation, Plane, Globe, ShieldCheck } from "lucide-react";
+import { useState } from 'react';
+import { MapPin, Globe, ShieldCheck, Star, ArrowRight } from "lucide-react";
 
 const About = () => {
-  // Direct Google Maps link for Magomano House, Tom Mboya St
-  const mapSearchUrl = "https://www.google.com/maps/search/?api=1&query=Magomano+House+Tom+Mboya+Street+Nairobi";
+  const [activeBranch, setActiveBranch] = useState('Nairobi');
+
+  const branches = {
+    Nairobi: {
+      address: "Magomano House, Tom Mboya St, Rm 4.4",
+      city: "Nairobi, Kenya",
+      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.818556108163!2d36.8227!3d-1.2833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d63683f12d%3A0x6b16c14828131!2sTom%20Mboya%20St%2C%20Nairobi!5e0!3m2!1sen!2ske!4v1710000000000!5m2!1sen!2ske"
+    },
+    Lagos: {
+      address: "Ogba, Floor 2, Room 15",
+      city: "Lagos, Nigeria",
+      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.2!2d3.3!3d6.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b93!2sOgba%2C%20Lagos!5e0!3m2!1sen!2sng!4v1710000000000!5m2!1sen!2sng"
+    },
+    Accra: {
+      address: "Accra City Center, Branch Office",
+      city: "Accra, Ghana",
+      map: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.5!2d-0.2!3d5.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1023!2sAccra!5e0!3m2!1sen!2sgh!4v1710000000000!5m2!1sen!2sgh"
+    }
+  };
 
   return (
-    <section
-      id="about"
-      className="py-24 bg-white text-slate-900 px-6 overflow-hidden select-none"
-      style={{ WebkitTouchCallout: 'none' }}
-    >
+    <section id="about" className="py-24 bg-slate-50 text-slate-900 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+        
+        {/* International Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start mb-16 gap-10">
           <div className="max-w-3xl">
-            <h2 className="text-blue-600 font-bold tracking-[0.4em] uppercase mb-4 text-sm">
-              Our Agency
-            </h2>
+            <div className="flex items-center gap-2 text-blue-600 font-bold tracking-[0.3em] uppercase mb-4 text-xs">
+              <Globe size={14} /> Pan-African Presence
+            </div>
             <h1 className="text-5xl md:text-7xl font-black mb-6 leading-[0.9] tracking-tighter">
-              EXCEPTIONAL TRAVEL <br />
-              <span className="text-blue-900">EXPERIENCES</span>
+              A GLOBAL AGENCY <br />
+              <span className="text-blue-900">WITH LOCAL ROOTS.</span>
             </h1>
-            <p className="text-slate-600 text-lg md:text-xl leading-relaxed font-medium">
-              At Pascal Travels and Tours, our mission is to provide exceptional 
-              travel experiences that exceed our clients' expectations. Based in the 
-              heart of Nairobi, we specialize in global mobility, job placements, and visa consultancy.
+            <p className="text-slate-600 text-lg md:text-xl leading-relaxed font-medium max-w-2xl">
+              Pascal Travels and Tours is a premier global mobility firm operating across 
+              <span className="text-blue-600 font-bold"> Kenya, Nigeria, and Ghana.</span> We bridge the gap 
+              between African talent and international opportunities.
             </p>
           </div>
 
-          <div className="hidden lg:block bg-blue-50 border border-blue-100 p-8 rounded-3xl rotate-3 hover:rotate-0 transition-transform duration-500 shadow-sm">
-            <p className="text-blue-900 font-black text-4xl mb-1 italic">ESTABLISHED</p>
-            <p className="text-xs text-blue-600 uppercase tracking-[0.2em] font-bold">
-              Trusted Travel Partner
-            </p>
+          <div className="grid grid-cols-2 gap-4 w-full lg:w-auto">
+            <div className="p-6 bg-white rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+              <ShieldCheck className="text-blue-600 mb-2" size={28} />
+              <p className="text-[10px] font-black uppercase text-slate-400">Licensed</p>
+              <p className="font-bold text-blue-900">Visa Experts</p>
+            </div>
+            <div className="p-6 bg-white rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center text-center">
+              <Star className="text-orange-400 mb-2" size={28} />
+              <p className="text-[10px] font-black uppercase text-slate-400">Success Rate</p>
+              <p className="font-bold text-blue-900">98% Global</p>
+            </div>
           </div>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-5 gap-10">
+        {/* Branch Switcher & Map */}
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Information Column */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:border-blue-200 transition-all duration-500 group shadow-sm">
-              <div className="bg-blue-600 p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform">
-                <MapPin className="text-white" size={32} />
-              </div>
-              <h3 className="text-2xl font-black mb-3 uppercase tracking-tighter text-blue-900">
-                Our Office
-              </h3>
-              <p className="text-slate-600 mb-8 font-semibold leading-relaxed">
-                Nairobi CBD, Tom Mboya Street,<br />
-                Magomano House, Rm 4.4<br />
-                Nairobi, Kenya.
-              </p>
-              
-              {/* Button leads directly to Magomano House */}
-              <a
-                href={mapSearchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-blue-900 text-white px-8 py-4 rounded-xl font-black hover:bg-blue-600 transition-all transform hover:scale-105 shadow-lg"
+          {/* Branch Selection Sidebar */}
+          <div className="lg:col-span-4 flex flex-col gap-4">
+            {Object.keys(branches).map((city) => (
+              <button
+                key={city}
+                onClick={() => setActiveBranch(city)}
+                className={`p-8 rounded-[2rem] text-left transition-all duration-500 border-2 ${
+                  activeBranch === city 
+                  ? 'bg-blue-900 border-blue-900 text-white shadow-2xl scale-[1.02]' 
+                  : 'bg-white border-slate-100 text-slate-600 hover:border-blue-200'
+                }`}
               >
-                GET DIRECTIONS <Navigation size={20} />
-              </a>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 text-center">
-                <ShieldCheck className="text-blue-600 mx-auto mb-2" />
-                <span className="block text-xs uppercase font-black text-slate-400">
-                  Verified
-                </span>
-                <span className="font-bold text-blue-900">Visa Process</span>
-              </div>
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-100 text-center">
-                <Plane className="text-blue-600 mx-auto mb-2" />
-                <span className="block text-xs uppercase font-black text-slate-400">
-                  Global
-                </span>
-                <span className="font-bold text-blue-900">Reach</span>
-              </div>
-            </div>
+                <div className="flex justify-between items-center mb-4">
+                  <MapPin size={24} className={activeBranch === city ? 'text-blue-400' : 'text-blue-600'} />
+                  {activeBranch === city && <div className="w-2 h-2 rounded-full bg-green-400 animate-ping"></div>}
+                </div>
+                <h3 className="text-2xl font-black tracking-tight mb-2 uppercase">{city}</h3>
+                <p className={`text-sm ${activeBranch === city ? 'text-blue-100' : 'text-slate-500'} font-medium`}>
+                  {branches[city].address}
+                </p>
+              </button>
+            ))}
           </div>
 
-          {/* Map Column */}
-          <div className="lg:col-span-3 h-[500px] relative group">
-            <div
-              onClick={() => window.open(mapSearchUrl, "_blank")}
-              className="relative w-full h-full cursor-pointer overflow-hidden rounded-[3rem] border border-slate-200 shadow-xl transition-all duration-700 group-hover:border-blue-400"
-            >
-              {/* Iframe pointing to Tom Mboya St. 
-                Note: In production, use a specific Google Maps Embed API key for the exact pin 
-              */}
-              <iframe
-                title="Pascal Travels Office Map"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.818645511855!2d36.8242858!3d-1.2826501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d296be7d89%3A0xd4b445bd46ff79b2!2sMagomano%20House!5e0!3m2!1sen!2ske!4v1710000000000!5m2!1sen!2ske"
-                className="absolute inset-0 w-full h-full z-0 transition-transform duration-1000 group-hover:scale-105"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-
-              {/* Light Overlay */}
-              <div className="absolute inset-0 bg-blue-900/5 z-10 pointer-events-none" />
-
-              {/* Floating Badge */}
-              <div className="absolute top-8 right-8 bg-blue-900 text-white px-6 py-2 rounded-full text-[10px] font-black tracking-[0.3em] uppercase shadow-xl z-30">
-                Nairobi CBD Location
-              </div>
+          {/* Map Display */}
+          <div className="lg:col-span-8 h-[500px] lg:h-auto relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white">
+            <iframe
+              title="Branch Location"
+              src={branches[activeBranch].map}
+              className="absolute inset-0 w-full h-full"
+              loading="lazy"
+              style={{ filter: 'grayscale(0.2) contrast(1.1)' }}
+            />
+            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-6 py-3 rounded-full shadow-lg z-10 flex items-center gap-3">
+              <div className="w-2 h-2 rounded-full bg-blue-600"></div>
+              <span className="text-[10px] font-black uppercase tracking-widest text-blue-900">
+                Current View: {branches[activeBranch].city}
+              </span>
             </div>
           </div>
 

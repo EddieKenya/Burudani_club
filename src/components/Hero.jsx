@@ -3,9 +3,9 @@ import { Plane, ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   const images = [
-    '/grads.jpg',
-    '/schen.jpg',
     '/aroplane.jpg',
+    '/schen.jpg',
+    '/grads.jpg',
     '/work.jpg'
   ];
 

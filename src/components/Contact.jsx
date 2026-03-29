@@ -41,11 +41,12 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    // Using your provided EmailJS credentials
     emailjs.sendForm(
-      'YOUR_SERVICE_ID', 
-      'YOUR_TEMPLATE_ID', 
+      'service_8nuwimo', 
+      'template_a3f7ehe', 
       form.current, 
-      'YOUR_PUBLIC_KEY'
+      'VWeE9qBtDH47d6BLG'
     )
     .then(() => {
       setIsSubmitting(false);
@@ -70,6 +71,7 @@ const Contact = () => {
           </h1>
         </div>
 
+        {/* Global Offices Grid */}
         <div className="grid lg:grid-cols-3 gap-8 mb-16">
           {offices.map((office, idx) => (
             <div key={idx} className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-200 hover:border-blue-500 transition-all group">
@@ -98,6 +100,8 @@ const Contact = () => {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 items-stretch">
+          
+          {/* Social & Info Sidebar */}
           <div className="lg:col-span-2 bg-blue-900 rounded-[3rem] p-10 text-white shadow-2xl flex flex-col justify-between">
             <div>
               <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">Connect With Us</h3>
@@ -130,6 +134,7 @@ const Contact = () => {
             </div>
           </div>
 
+          {/* Inquiry Form */}
           <div className="lg:col-span-3 bg-white rounded-[3rem] p-10 shadow-2xl border border-slate-200">
             <h3 className="text-2xl font-black text-blue-900 mb-8 uppercase tracking-tight">Send An Inquiry</h3>
             
@@ -145,7 +150,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* REQUESTED SERVICE DROPDOWN ADDED HERE */}
+              {/* Subject Selection Area */}
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Requested Service</label>
                 <div className="relative">
@@ -155,11 +160,12 @@ const Contact = () => {
                     className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900 font-bold appearance-none cursor-pointer"
                   >
                     <option value="" disabled selected>Select a Service</option>
-                    <option value="Work Permit">Work Visa</option>
+                    <option value="Work Visa">Work Visa</option>
                     <option value="Study Visa">Study Visa</option>
-                    <option value="Visit Visa">Job Placements</option>
+                    <option value="Job Placements">Job Placements</option>
                     <option value="Canada PR">Permanent Residency (Canada PR)</option>
-                    <option value="Job Placement">Schengen Visa</option>
+                    <option value="Schengen Visa">Schengen Visa</option>
+                    <option value="Ticketing">Ticketing & Reservations</option>
                   </select>
                   <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={20} />
                 </div>
@@ -182,7 +188,12 @@ const Contact = () => {
               {status.sent && (
                 <div className="p-4 bg-green-50 border border-green-200 rounded-2xl flex items-center gap-3 text-green-700 font-bold animate-in fade-in">
                   <CheckCircle2 size={20} />
-                  Message received! We have sent an automatic reply to your email.
+                  Message received! We have sent a confirmation to your email.
+                </div>
+              )}
+              {status.error && (
+                <div className="p-4 bg-red-50 border border-red-200 rounded-2xl flex items-center gap-3 text-red-700 font-bold">
+                  Something went wrong. Please try again or call us directly.
                 </div>
               )}
             </form>

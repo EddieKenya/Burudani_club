@@ -41,23 +41,28 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Using your provided EmailJS credentials
-    emailjs.sendForm(
-      'service_8nuwimo', 
-      'template_a3f7ehe', 
-      form.current, 
-      'VWeE9qBtDH47d6BLG'
-    )
-    .then(() => {
-      setIsSubmitting(false);
-      setStatus({ sent: true, error: false });
-      form.current.reset();
-      setTimeout(() => setStatus({ sent: false, error: false }), 7000);
-    }, (error) => {
-      setIsSubmitting(false);
-      setStatus({ sent: false, error: true });
-      console.error('EmailJS Error:', error);
-    });
+    const serviceId = 'service_8nuwimo';
+    const publicKey = 'VWeE9qBtDH47d6BLG';
+    const adminTemplateId = 'template_a3f7ehe'; // Notification for you
+    const clientTemplateId = 'template_kiapu87'; // Auto-reply for the client
+
+    // Trigger both emails at the same time
+    const sendToAdmin = emailjs.sendForm(serviceId, adminTemplateId, form.current, publicKey);
+    const sendToClient = emailjs.sendForm(serviceId, clientTemplateId, form.current, publicKey);
+
+    Promise.all([sendToAdmin, sendToClient])
+      .then(() => {
+        setIsSubmitting(false);
+        setStatus({ sent: true, error: false });
+        form.current.reset();
+        // Clear success message after 7 seconds
+        setTimeout(() => setStatus({ sent: false, error: false }), 7000);
+      })
+      .catch((error) => {
+        setIsSubmitting(false);
+        setStatus({ sent: false, error: true });
+        console.error('EmailJS Error:', error);
+      });
   };
 
   return (

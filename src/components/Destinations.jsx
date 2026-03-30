@@ -6,7 +6,7 @@ const Destinations = () => {
       id: 1,
       name: "Dubai & Abu Dhabi",
       region: "UAE",
-      image: "/uae.jpg",
+      image: "/dubai_pic.avif",
       // Large on desktop, full width on mobile
       size: "md:col-span-2 md:row-span-2 aspect-[4/5] md:aspect-auto", 
       tag: "Business & Leisure"
@@ -15,7 +15,7 @@ const Destinations = () => {
       id: 2,
       name: "Cape Town",
       region: "South Africa",
-      image: "/Capetown.jpg",
+      image: "/capetown.webp",
       size: "md:col-span-1 md:row-span-1 aspect-square md:aspect-auto",
       tag: "Adventure"
     },
@@ -29,9 +29,9 @@ const Destinations = () => {
     },
     {
       id: 4,
-      name: "Rome",
-      region: "Italy",
-      image: "/Rome.jpg",
+      name: "Maldives",
+      region: "South Asia",
+      image: "/maldives.jpg",
       size: "md:col-span-1 md:row-span-1 aspect-square md:aspect-auto",
       tag: "History"
     }

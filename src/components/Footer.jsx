@@ -67,6 +67,7 @@ const Footer = () => {
               <h4 className="text-xs font-black uppercase tracking-[0.2em] text-blue-500">Services</h4>
               <ul className="space-y-2 text-sm text-slate-400 font-medium">
                 <li><a href="#work" className="hover:text-white transition-colors">Work Visas</a></li>
+                <li><a href="#education" className="hover:text-white transition-colors">Visit Visas</a></li>
                 <li><a href="#education" className="hover:text-white transition-colors">Study Abroad</a></li>
                 <li><a href="#destinations" className="hover:text-white transition-colors">Job Placements</a></li>
                 <li><a href="#contact" className="hover:text-white transition-colors">Schengen Visa</a></li>

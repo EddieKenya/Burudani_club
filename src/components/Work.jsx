@@ -7,7 +7,7 @@ const Work = () => {
       title: "Germany & Poland",
       subtitle: "Industrial & Skilled Labor",
       desc: "Access the robust European job market. We specialize in securing work permits for Germany and Poland, focusing on manufacturing, logistics, and technical roles.",
-      image: "/construction.webp", // or /poland.jpg
+      image: "/germany.jpg", // or /poland.jpg
       points: ["Tier-1 Work Permits", "Language Support", "Long-term Residency Path"]
     },
     {
@@ -15,7 +15,7 @@ const Work = () => {
       title: "Construction & Skilled Trades",
       subtitle: "Gulf & European Opportunities",
       desc: "The construction sector in the UAE and Europe is booming. Pascal Travels connects skilled tradespeople—from engineers to site workers—with verified employers.",
-      image: "/dubai.jpg",
+      image: "/construction.webp",
       points: ["Verified Contracts", "Accommodation Support", "Medical Insurance Included"]
     }
   ];

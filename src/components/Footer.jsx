@@ -3,17 +3,16 @@ import { Instagram, Facebook, Music2, Globe, ArrowUp } from 'lucide-react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  // Social links kept in an array for easy future updates
   const socialLinks = [
     { 
       name: 'Instagram', 
       icon: <Instagram size={20} />, 
-      url: '#' // Update with Pascal Travels Instagram
+      url: '#' 
     },
     { 
       name: 'Facebook', 
       icon: <Facebook size={20} />, 
-      url: '#' // Update with Pascal Travels Facebook
+      url: '#' 
     },
     { 
       name: 'TikTok', 
@@ -46,7 +45,6 @@ const Footer = () => {
               Specializing in global mobility, job placements, and visa consultancy.
             </p>
             
-            {/* Socials - Dynamic Array */}
             <div className="flex gap-4 pt-2">
               {socialLinks.map((social) => (
                 <a
@@ -63,7 +61,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Navigation */}
+          {/* Updated Quick Navigation based on image_7bafde.png */}
           <div className="grid grid-cols-2 gap-8 col-span-1 md:col-span-1">
             <div className="space-y-4">
               <h4 className="text-xs font-black uppercase tracking-[0.2em] text-blue-500">Services</h4>
@@ -72,6 +70,8 @@ const Footer = () => {
                 <li><a href="#education" className="hover:text-white transition-colors">Study Abroad</a></li>
                 <li><a href="#destinations" className="hover:text-white transition-colors">Job Placements</a></li>
                 <li><a href="#contact" className="hover:text-white transition-colors">Schengen Visa</a></li>
+                <li><a href="#booking" className="hover:text-white transition-colors">Hotel & Airport Pickup</a></li>
+                <li><a href="#success" className="hover:text-white transition-colors">Ticketing</a></li>
               </ul>
             </div>
             <div className="space-y-4">
@@ -84,7 +84,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Back to Top / Newsletter Style Info */}
+          {/* Back to Top / Nairobi Office Info */}
           <div className="flex flex-col items-start md:items-end justify-between space-y-8">
             <button 
               onClick={scrollToTop}

@@ -18,7 +18,7 @@ const Contact = () => {
       phones: ["+254 705205903", "+254 753731136"],
       intl: ["+971 559954082", "+971 568242388"],
       location: "Magomano B.S complex, Tom Mboya street, Opp KTDA plaza, Nairobi.",
-      email: "pascaltravels@gmail.com",
+      email: "pascaltravelsdocs@gmail.com",
       color: "bg-blue-600"
     },
     {
@@ -124,7 +124,7 @@ const Contact = () => {
                   <Mail className="text-blue-300" size={20} />
                   <div>
                     <p className="text-[10px] uppercase font-bold text-blue-300">Email Support</p>
-                    <p className="font-bold text-sm">pascaltravels@gmail.com</p>
+                    <p className="font-bold text-sm">pascaltravelsdoc@gmail.com</p>
                   </div>
                 </div>
               </div>

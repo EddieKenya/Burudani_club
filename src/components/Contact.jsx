@@ -11,7 +11,6 @@ const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState({ sent: false, error: false });
 
-  // Office Data Configuration
   const offices = [
     {
       country: "Kenya (Head Office)",
@@ -43,10 +42,9 @@ const Contact = () => {
 
     const serviceId = 'service_8nuwimo';
     const publicKey = 'VWeE9qBtDH47d6BLG';
-    const adminTemplateId = 'template_a3f7ehe'; // Notification for you
-    const clientTemplateId = 'template_kiapu87'; // Auto-reply for the client
+    const adminTemplateId = 'template_a3f7ehe';
+    const clientTemplateId = 'template_kiapu87';
 
-    // Trigger both emails at the same time
     const sendToAdmin = emailjs.sendForm(serviceId, adminTemplateId, form.current, publicKey);
     const sendToClient = emailjs.sendForm(serviceId, clientTemplateId, form.current, publicKey);
 
@@ -55,7 +53,6 @@ const Contact = () => {
         setIsSubmitting(false);
         setStatus({ sent: true, error: false });
         form.current.reset();
-        // Clear success message after 7 seconds
         setTimeout(() => setStatus({ sent: false, error: false }), 7000);
       })
       .catch((error) => {
@@ -66,25 +63,25 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 bg-slate-50">
+    <section id="contact" className="py-16 md:py-24 px-4 md:px-6 bg-slate-50">
       <div className="max-w-7xl mx-auto">
         
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <h2 className="text-blue-600 font-bold tracking-[0.4em] uppercase mb-4 text-xs">Get In Touch</h2>
-          <h1 className="text-4xl md:text-6xl font-black text-blue-900 tracking-tighter uppercase">
+          <h1 className="text-3xl md:text-6xl font-black text-blue-900 tracking-tighter uppercase">
             Contact Our <span className="text-blue-600 italic font-light">Global Offices</span>
           </h1>
         </div>
 
         {/* Global Offices Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-16">
           {offices.map((office, idx) => (
-            <div key={idx} className="bg-white rounded-[2.5rem] p-8 shadow-xl border border-slate-200 hover:border-blue-500 transition-all group">
+            <div key={idx} className="bg-white rounded-[2rem] md:rounded-[2.5rem] p-6 md:p-8 shadow-xl border border-slate-200 hover:border-blue-500 transition-all group">
               <div className={`${office.color} w-12 h-12 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg`}>
                 <MapPin size={24} />
               </div>
               
-              <h3 className="text-xl font-black text-blue-900 uppercase tracking-tight mb-4 flex items-center gap-2">
+              <h3 className="text-lg md:text-xl font-black text-blue-900 uppercase tracking-tight mb-4 flex items-center gap-2">
                 {office.country} {idx === 0 && <Award size={16} className="text-blue-500" />}
               </h3>
 
@@ -96,7 +93,7 @@ const Contact = () => {
                 <div>
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Contact Lines</p>
                   {office.phones.map((p, i) => (
-                    <p key={i} className="text-blue-600 font-black text-lg">{p}</p>
+                    <p key={i} className="text-blue-600 font-black text-base md:text-lg break-words">{p}</p>
                   ))}
                 </div>
               </div>
@@ -104,12 +101,12 @@ const Contact = () => {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-stretch">
+        <div className="grid lg:grid-cols-5 gap-6 md:gap-8 items-stretch">
           
-          {/* Social & Info Sidebar */}
-          <div className="lg:col-span-2 bg-blue-900 rounded-[3rem] p-10 text-white shadow-2xl flex flex-col justify-between">
+          {/* Sidebar */}
+          <div className="lg:col-span-2 bg-blue-900 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 text-white shadow-2xl flex flex-col justify-between">
             <div>
-              <h3 className="text-2xl font-black mb-6 uppercase tracking-tight">Connect With Us</h3>
+              <h3 className="text-xl md:text-2xl font-black mb-6 uppercase tracking-tight">Connect With Us</h3>
               <p className="text-blue-100 mb-8 font-medium">Our support team is available across multiple timezones to assist your travel needs.</p>
               
               <div className="space-y-4">
@@ -124,7 +121,7 @@ const Contact = () => {
                   <Mail className="text-blue-300" size={20} />
                   <div>
                     <p className="text-[10px] uppercase font-bold text-blue-300">Email Support</p>
-                    <p className="font-bold text-sm">pascaltravelsdoc@gmail.com</p>
+                    <p className="font-bold text-sm break-words">pascaltravelsdoc@gmail.com</p>
                   </div>
                 </div>
               </div>
@@ -139,31 +136,26 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Inquiry Form */}
-          <div className="lg:col-span-3 bg-white rounded-[3rem] p-10 shadow-2xl border border-slate-200">
-            <h3 className="text-2xl font-black text-blue-900 mb-8 uppercase tracking-tight">Send An Inquiry</h3>
+          {/* Form */}
+          <div className="lg:col-span-3 bg-white rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 shadow-2xl border border-slate-200">
+            <h3 className="text-xl md:text-2xl font-black text-blue-900 mb-6 md:mb-8 uppercase tracking-tight">Send An Inquiry</h3>
             
             <form ref={form} onSubmit={sendEmail} className="space-y-5">
-              <div className="grid md:grid-cols-2 gap-5">
+              <div className="grid md:grid-cols-2 gap-4 md:gap-5">
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Full Name</label>
-                  <input name="user_name" type="text" required placeholder="e.g. John Doe" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
+                  <input name="user_name" type="text" required placeholder="e.g. John Doe" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
                 </div>
                 <div className="space-y-2">
                   <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Phone Number</label>
-                  <input name="user_phone" type="text" required placeholder="+254 XXX XXX XXX" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
+                  <input name="user_phone" type="text" required placeholder="+254 XXX XXX XXX" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
                 </div>
               </div>
 
-              {/* Subject Selection Area */}
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Requested Service</label>
                 <div className="relative">
-                  <select 
-                    name="requested_service" 
-                    required 
-                    className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900 font-bold appearance-none cursor-pointer"
-                  >
+                  <select name="requested_service" required className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900 font-bold appearance-none cursor-pointer">
                     <option value="" disabled selected>Select a Service</option>
                     <option value="Work Visa">Work Visa</option>
                     <option value="Study Visa">Study Visa</option>
@@ -172,21 +164,21 @@ const Contact = () => {
                     <option value="Schengen Visa">Schengen Visa</option>
                     <option value="Ticketing">Ticketing & Reservations</option>
                   </select>
-                  <ChevronDown className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={20} />
+                  <ChevronDown className="absolute right-4 md:right-6 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={20} />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Email Address</label>
-                <input name="user_email" type="email" required placeholder="name@email.com" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
+                <input name="user_email" type="email" required placeholder="name@email.com" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900" />
               </div>
 
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Message</label>
-                <textarea name="message" required placeholder="How can we assist you today?" rows="4" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900"></textarea>
+                <textarea name="message" required rows="4" placeholder="How can we assist you today?" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 outline-none focus:border-blue-600 focus:bg-white transition-all text-slate-900"></textarea>
               </div>
 
-              <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-6 rounded-2xl transition-all flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-sm shadow-xl disabled:opacity-50">
+              <button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-4 md:py-6 rounded-2xl transition-all flex items-center justify-center gap-3 uppercase tracking-[0.2em] text-xs md:text-sm shadow-xl disabled:opacity-50">
                 {isSubmitting ? <>Processing... <Loader2 className="animate-spin" size={20} /></> : <>Send Inquiry <Send size={20} /></>}
               </button>
 

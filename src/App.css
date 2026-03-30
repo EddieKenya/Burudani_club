@@ -1,21 +1,40 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* 1. THE FIX: Lock the viewport width to prevent sideways sliding */
+html, 
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* This kills the horizontal scroll */
+  position: relative;
+  -webkit-overflow-scrolling: touch; /* Smoother scrolling for iPhone */
 }
+
+/* 2. REFINED ROOT: Ensure the main container doesn't force a margin */
+#root {
+  width: 100%;
+  margin: 0 auto;
+  /* Removed fixed padding: 2rem here as it often pushes 
+     full-width Navbars and Hero sections out of alignment */
+  text-align: center;
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
 }
+
+/* Rest of your existing styles */
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }

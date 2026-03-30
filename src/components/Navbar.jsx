@@ -1,4 +1,4 @@
-import { Menu, X, Plane, Briefcase, GraduationCap, Phone, MapPin } from 'lucide-react';
+import { Menu, X, Plane, Briefcase, GraduationCap, Phone, MapPin, Globe } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const Navbar = () => {
@@ -27,10 +27,12 @@ const Navbar = () => {
     };
   }, [isOpen]);
 
+  // Links aligned with updated App.jsx IDs
   const navLinks = [
     { name: 'About Us', href: '#about' },
-    { name: 'Study Visas', href: '#events', icon: <GraduationCap size={14} /> },
+    { name: 'Visit Visas', href: '#visit-visa', icon: <Globe size={14} /> },
     { name: 'Work Visas', href: '#walkthrough', icon: <Briefcase size={14} /> },
+    { name: 'Study Visas', href: '#events', icon: <GraduationCap size={14} /> },
     { name: 'Destinations', href: '#booking', icon: <MapPin size={14} /> },
     { name: 'Contact Us', href: '#contact' },
   ];
@@ -58,12 +60,12 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex gap-8 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-700 items-center">
+        <div className="hidden lg:flex gap-6 xl:gap-8 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-700 items-center">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="hover:text-blue-600 transition-colors duration-300 flex items-center gap-2 group relative"
+              className="hover:text-blue-600 transition-colors duration-300 flex items-center gap-2 group relative whitespace-nowrap"
             >
               {link.icon && <span className="text-blue-400 group-hover:text-blue-600 transition-colors">{link.icon}</span>}
               {link.name}
@@ -71,15 +73,17 @@ const Navbar = () => {
             </a>
           ))}
           
-          <div className="h-6 w-[1px] bg-slate-200 mx-2"></div>
+          <div className="h-6 w-[1px] bg-slate-200 mx-1"></div>
 
-          <a href="tel:+254705205903" className="hover:text-blue-600 transition-colors flex items-center gap-2 text-blue-900">
-            <Phone size={16} />
+          {/* Instant Call Link */}
+          <a href="tel:+254705205903" className="hover:text-blue-600 transition-colors flex items-center gap-2 text-blue-900 whitespace-nowrap">
+            <Phone size={14} />
             <span className="hidden xl:inline">CALL US</span>
           </a>
 
+          {/* Apply Now Button leading to Contact Section */}
           <a href="#contact">
-            <button className="bg-blue-600 text-white px-6 py-2.5 rounded-lg font-black hover:bg-blue-700 transition-all active:scale-95 shadow-md shadow-blue-100 flex items-center gap-2 text-[10px]">
+            <button className="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-black hover:bg-blue-700 transition-all active:scale-95 shadow-md shadow-blue-100 flex items-center gap-2 text-[9px] whitespace-nowrap">
               <Plane size={14} className="rotate-45" /> APPLY NOW
             </button>
           </a>
@@ -109,10 +113,16 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)} 
               className="flex items-center gap-4 py-4 px-4 rounded-xl hover:bg-blue-50 text-slate-700 hover:text-blue-600 transition-all text-xs font-black uppercase tracking-widest"
             >
-              <span className="text-blue-500">{link.icon || <Plane size={14} />}</span>
+              <span className="text-blue-500">{link.icon}</span>
               {link.name}
             </a>
           ))}
+          
+          {/* Mobile Instant Call Action */}
+          <a href="tel:+254705205903" className="flex items-center gap-4 py-4 px-4 rounded-xl hover:bg-blue-50 text-blue-900 transition-all text-xs font-black uppercase tracking-widest">
+            <Phone size={14} className="text-blue-500" />
+            Call Now
+          </a>
           
           <div className="mt-4 pt-4 border-t border-slate-100">
             <a href="#contact" onClick={() => setIsOpen(false)}>

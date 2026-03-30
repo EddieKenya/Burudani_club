@@ -9,13 +9,21 @@ import Work from './components/Work';
 import Destinations from './components/Destinations';
 import Preloader from './components/Preloader';
 import VideoSuccess from './components/VideoSuccess';
-import ChatBot from './components/ChatBot'; // 1. Import the new component
-
+import ChatBot from './components/ChatBot';
+import VisitVisa from './components/Visit';
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const criticalImages = ['/grads.jpg', '/schen.jpg', '/aroplane.jpg', '/work.jpg'];
+    // Added your new visit visa images to the preloader cache
+    const criticalImages = [
+      '/grads.jpg', 
+      '/schen.jpg', 
+      '/aroplane.jpg', 
+      '/work.jpg',
+      '/europe_visit.jpg', 
+      '/saudi_visit.jpg'
+    ];
 
     const cacheImages = async (srcArray) => {
       const promises = srcArray.map((src) => {
@@ -39,7 +47,6 @@ function App() {
     cacheImages(criticalImages);
   }, []);
 
-  // Show preloader while images are being cached
   if (isLoading) {
     return <Preloader />;
   }
@@ -56,6 +63,15 @@ function App() {
         <About />
       </div>
 
+      {/* New Section Placed Above Education */}
+      <div id="visit-visa">
+        <VisitVisa />
+      </div>
+         
+      <div id="walkthrough">
+        <Work />
+      </div>
+
       <div id="events">
         <Education />
       </div>
@@ -63,10 +79,7 @@ function App() {
       <div id="success">
         <VideoSuccess />
       </div>
-      
-      <div id="walkthrough">
-        <Work />
-      </div>
+   
 
       <div id="booking">
         <Destinations />
@@ -78,7 +91,6 @@ function App() {
 
       <Footer />
 
-      {/* 2. Place ChatBot here so it floats above everything else */}
       <ChatBot />
     </div>
   );

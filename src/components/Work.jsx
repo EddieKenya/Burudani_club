@@ -31,7 +31,7 @@ const Work = () => {
             <div className="hidden md:block h-1 flex-grow bg-white/10"></div>
           </h2>
           <p className="text-slate-400 font-medium max-w-2xl">
-            Pascal Travels & Tours bridge the gap between skilled Kenyan professionals 
+            Pascal Travels & Tours bridge the gap between skilled African professionals 
             and international employers in Europe and the Middle East.
           </p>
         </div>

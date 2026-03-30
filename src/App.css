@@ -1,29 +1,49 @@
-/* 1. THE FIX: Lock the viewport width to prevent sideways sliding */
+/* 1. THE FIX: Lock the viewport width to prevent sideways sliding & lag */
 html, 
 body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* This kills the horizontal scroll */
+  overflow-x: hidden; /* Kills horizontal "wobble" and sideways sliding */
   position: relative;
-  -webkit-overflow-scrolling: touch; /* Smoother scrolling for iPhone */
+  
+  /* Performance & Lag reduction for all platforms */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* iPhone/iOS specific: Native-feel momentum scrolling */
+  -webkit-overflow-scrolling: touch; 
+  
+  /* Android specific: Prevents "bounce" lag and extra gestures */
+  overscroll-behavior-y: none;
+  touch-action: pan-y;
 }
 
-/* 2. REFINED ROOT: Ensure the main container doesn't force a margin */
+/* 2. REFINED ROOT: Hardware Acceleration for smooth scrolling */
 #root {
   width: 100%;
   margin: 0 auto;
-  /* Removed fixed padding: 2rem here as it often pushes 
-     full-width Navbars and Hero sections out of alignment */
   text-align: center;
   overflow-x: hidden;
+  
+  /* Forces GPU Acceleration across all browsers */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
-/* Rest of your existing styles */
+/* 3. PERFORMANCE HINTS: Prevents stutter on heavy sections like Hero or Navbar */
+nav, section, .hero-bg {
+  transform: translate3d(0,0,0);
+  will-change: transform;
+}
+
+/* 4. ORIGINAL STYLES: Preserved exactly as requested */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -60,4 +80,11 @@ html {
 
 .read-the-docs {
   color: #888;
+}
+
+/* 5. DESKTOP OPTIMIZATION: Prevents content "jumping" when scrollbars appear */
+@media (min-width: 1024px) {
+  html {
+    scrollbar-gutter: stable;
+  }
 }

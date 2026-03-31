@@ -5,8 +5,8 @@ const Hero = () => {
   const images = [
     '/aroplane.jpg',
     '/schen.jpg',
-    '/grads.jpg',
-    '/work.jpg'
+    '/pamplet.jpeg',
+    '/pamplet2.jpeg'
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

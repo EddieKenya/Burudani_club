@@ -7,7 +7,7 @@ const Work = () => {
       title: "Germany & Poland",
       subtitle: "Industrial & Skilled Labor",
       desc: "Access the robust European job market. We specialize in securing work permits for Germany and Poland, focusing on manufacturing, logistics, and technical roles.",
-      image: "/germany.jpg", // or /poland.jpg
+      image: "/germany pamplet.jpeg", // or /poland.jpg
       points: ["Tier-1 Work Permits", "Language Support", "Long-term Residency Path"]
     },
     {

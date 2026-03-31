@@ -46,7 +46,14 @@ const Navbar = () => {
       <div className="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
         
         {/* Logo Section */}
-        <div className="flex items-center h-full">
+        <div className="flex items-center gap-4 h-full">
+          {/* Unclickable Logo Image */}
+          <img 
+            src="/logo.png" 
+            alt="Pascal Travels Logo" 
+            className="h-10 w-auto object-contain pointer-events-none select-none" 
+          />
+          
           <a href="#hero" className="block group flex items-center gap-3">
             <div className="flex flex-col">
               <span className="font-black text-blue-900 tracking-tighter text-xl leading-none">

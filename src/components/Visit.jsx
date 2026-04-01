@@ -84,7 +84,10 @@ const VisitVisa = () => {
                   </div>
                 </div>
                 
-                <button className="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-700 transition-all shadow-lg shadow-blue-100">
+                <button 
+                  onClick={() => window.location.href = '#contact'}
+                  className="w-full sm:w-auto bg-blue-600 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] hover:bg-blue-700 transition-all shadow-lg shadow-blue-100"
+                >
                   Start PR Assessment
                 </button>
               </div>
@@ -190,7 +193,10 @@ const VisitVisa = () => {
               </div>
             </div>
 
-            <button className="mt-16 bg-white text-blue-900 px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-blue-50 transition-all flex items-center gap-3">
+            <button 
+              onClick={() => window.location.href = '#contact'}
+              className="mt-16 bg-white text-blue-900 px-12 py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-blue-50 transition-all flex items-center gap-3"
+            >
               Book Complete Package <ChevronRight size={18} />
             </button>
           </div>

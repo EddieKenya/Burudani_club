@@ -34,9 +34,9 @@ const Education = () => {
         
         {/* Section Header */}
         <div className="mb-16">
-          <h2 className="text-slate-900 text-4xl font-black mb-4 flex items-center gap-4">
+          <h2 className="text-slate-900 text-3xl md:text-4xl font-black mb-4 flex items-center gap-4">
             STUDY <span className="text-blue-600 uppercase">ABROAD</span>
-            <div className="h-1 flex-grow bg-slate-100"></div>
+            <div className="h-1 flex-grow bg-slate-100 hidden sm:block"></div>
           </h2>
           <p className="text-slate-500 font-medium max-w-2xl">
             We partner with world-class institutions to ensure our clients secure 
@@ -44,8 +44,8 @@ const Education = () => {
           </p>
         </div>
 
-        {/* University Grid - No Buttons */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        {/* University Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
           {universityPartners.map((uni) => (
             <div 
               key={uni.id}
@@ -60,7 +60,7 @@ const Education = () => {
               
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900 via-transparent to-transparent z-10" />
 
-              <div className="relative z-20 p-8 h-full flex flex-col justify-end">
+              <div className="relative z-20 p-6 md:p-8 h-full flex flex-col justify-end">
                 <div className="flex justify-between items-start mb-4">
                   <span className="bg-white/10 backdrop-blur-md text-white px-3 py-1 rounded-full font-bold uppercase tracking-widest text-[9px] border border-white/20">
                     {uni.tag}
@@ -68,7 +68,7 @@ const Education = () => {
                   <GraduationCap className="text-white opacity-80" size={24} />
                 </div>
 
-                <h3 className="text-white text-3xl font-black mb-2 transition-colors tracking-tighter">
+                <h3 className="text-white text-2xl md:text-3xl font-black mb-2 transition-colors tracking-tighter">
                   {uni.title}
                 </h3>
 
@@ -80,47 +80,46 @@ const Education = () => {
           ))}
         </div>
 
-        {/* Agency Support Section & Final CTA */}
-        <div className="bg-slate-50 rounded-[2.5rem] p-10 md:p-16 border border-slate-100 relative overflow-hidden">
-          <div className="relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+        {/* Agency Support Section & Final CTA - MOBILE OPTIMIZED */}
+        <div className="bg-slate-50 rounded-[2rem] md:rounded-[2.5rem] p-8 md:p-16 border border-slate-100 relative overflow-hidden">
+          <div className="relative z-10 grid lg:grid-cols-2 gap-10 items-center">
             <div>
-              <h3 className="text-blue-900 text-3xl font-black mb-6 uppercase tracking-tight">
+              <h3 className="text-blue-900 text-2xl md:text-3xl font-black mb-6 uppercase tracking-tight leading-tight">
                 How Pascal Travels Secures Your Future
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed mb-8">
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 break-words">
                 Securing a study visa is more than just an application; it's a life-changing transition. 
                 Our team at Pascal Travels & Tours provides end-to-end support—from selecting the right 
                 course and university to meticulously preparing your visa documentation. We ensure 
-                all requirements for the US, Canada, Australia and Europe are met with 100% precision, 
-                minimizing risks and maximizing your chances of success.
+                all requirements for the US, Canada, Australia and Europe are met with 100% precision.
               </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
-                  <CheckCircle size={18} className="text-blue-600" /> Admission Guidance
-                </div>
-                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
-                  <CheckCircle size={18} className="text-blue-600" /> Document Verification
-                </div>
-                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
-                  <CheckCircle size={18} className="text-blue-600" /> Visa Interview Prep
-                </div>
-                <div className="flex items-center gap-3 text-slate-700 font-bold text-sm">
-                  <CheckCircle size={18} className="text-blue-600" /> Post-Arrival Support
-                </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                {[
+                  "Admission Guidance", 
+                  "Document Verification", 
+                  "Visa Interview Prep", 
+                  "Post-Arrival Support"
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3 text-slate-700 font-bold text-xs md:text-sm">
+                    <CheckCircle size={18} className="text-blue-600 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="flex justify-center lg:justify-end">
-              <a href="#contact" className="w-full md:w-auto">
-                <button className="w-full md:w-auto bg-blue-600 text-white px-12 py-6 rounded-2xl font-black text-lg hover:bg-blue-900 transition-all transform hover:scale-105 shadow-2xl shadow-blue-200 flex items-center justify-center gap-4">
-                  START YOUR APPLICATION <ArrowRight size={24} />
+              <a href="#contact" className="w-full sm:w-auto">
+                <button className="w-full sm:w-auto bg-blue-600 text-white px-8 md:px-12 py-5 md:py-6 rounded-2xl font-black text-sm md:text-lg hover:bg-blue-900 transition-all transform active:scale-95 shadow-xl shadow-blue-200 flex items-center justify-center gap-4">
+                  START APPLICATION <ArrowRight size={20} className="md:w-6 md:h-6" />
                 </button>
               </a>
             </div>
           </div>
           
           {/* Subtle Background Accent */}
-          <div className="absolute -right-20 -top-20 text-blue-100 opacity-20">
+          <div className="absolute -right-20 -top-20 text-blue-100 opacity-10 pointer-events-none">
             <GraduationCap size={300} />
           </div>
         </div>
